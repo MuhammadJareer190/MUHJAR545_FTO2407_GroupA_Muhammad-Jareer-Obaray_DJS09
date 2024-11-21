@@ -96,11 +96,24 @@ const properties : Properties[] = [
             firstLine: 'flat 15',
             city: 'Londan',
             code: 35433,
-            country: 'United Kingdom'
+            country: 'United Kingdom',
         },
         contact: [+1123495082908, 'garydavis@hotmail.com'],
         isAvailable: true
     },
+    {
+        image: string,
+        title: 'Malia Hotel',
+        price: 35,
+        location: {
+            firstLine: 'room 4',
+            city: 'Malai',
+            code: 43224,
+            country: 'Malaysia',
+        }
+        contact: [ +60349822083, 'lee34@gmail.com'],
+        isAvailable:false,
+    }
 ]
 
 // Functions

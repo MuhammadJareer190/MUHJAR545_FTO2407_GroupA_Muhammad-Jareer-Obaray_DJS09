@@ -31,3 +31,7 @@ body {
 .user-container {
     margin: 20px;
 }
+
+.card img {
+    width: 100%;
+}
