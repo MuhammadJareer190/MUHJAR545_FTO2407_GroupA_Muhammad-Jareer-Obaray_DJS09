@@ -4,8 +4,8 @@
 // : number
 import { showReviewTotal, populateUser, showDetails, getTopTwoReviews } from "./utils";
 import { Permissions, LoyaltyUser } from "./enums";
-import { Price ,Country } from "./type";
-import Review  from "./interfaces";
+import { Review, Properties}  from "./interfaces";
+import MainProperty from "./classes";
 const propertyContainer = document.querySelector('.properties')
 const reviewContainer = document.querySelector('.reviews')
 const container = document.querySelector('.container')
@@ -46,19 +46,7 @@ const you = {
     age : 35,
     stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
 } 
-interface Properties{
-    image: string;
-    title: string;
-    price: Price;
-    location: {
-        firstLine: string;
-        city: string;
-        code: number| string;
-        country: Country;
-    }
-    contact: [number, string]
-    isAvailable: boolean;
-}
+
 
 // Array Of Properties
 const properties : Properties[] = [
@@ -153,28 +141,18 @@ button.addEventListener('click', () => addReviews(reviews))
 let currentLocation : [string, string, number] = ['London', '11.03', 17]
 footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2] + '°'
 
-// Classes
-class MainProperty {
-    src: string;
-    title: string;
-    reviews: Review[]
-    constructor(src: string, title: string, reviews: Review[])
-        this.src = scr
-        this.title = title
-        this.reviews = reviews
-}
 
 let yourMainProperty = new MainProperty(
-    images/italian-property.jpg', 
+    'images/italian-property.jpg', 
     'Italian House',
-[{
-    name: 'Olive',
-    stars: 5;
-    LoyaltyUser: LoyaltyUser.GOLD_USER,
-    date: '12-04-2021',
-}])
+    [{
+        name: 'Olive',
+        stars: 5,
+        loyaltyUser: LoyaltyUser.GOLD_USER,
+        date: '12-04-2021'
+    }] )
 
 const mainImageContainer = document.querySelector('.main-image')
-const image = document.querySelector('img')
+const image = document.createElement('img')
 image.setAttribute('src', yourMainProperty.src)
 mainImageContainer.appendChild(image)

@@ -1,7 +1,7 @@
 const returningUserDisplay = document.querySelector('#returning-user')
 const userNameDisplay = document.querySelector('#user')
 const reviewTotalDisplay = document.querySelector('#reviews')
-import { Review } from "./interfaces"
+import  Review  from "./interfaces"
 
 enum Permissions {
     ADMIN = 'ADMIN', 
