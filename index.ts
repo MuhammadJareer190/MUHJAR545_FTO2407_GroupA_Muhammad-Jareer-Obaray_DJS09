@@ -10,12 +10,7 @@ const footer = document.querySelector('.footer')
 let isOpen : boolean
 
 
-const reviews : {
-    name: string;
-    stars: number;
-    loyaltyUser: LoyaltyUser;
-    date: string;
-}[] = [
+const reviews : any[] = [
     {
         name: 'Sheia',
         stars: 5,
@@ -33,6 +28,7 @@ const reviews : {
         stars: 4,
         loyaltyUser: LoyaltyUser.SILVER_USER,
         date: '27-03-2021'
+        description: 'Great host, location was a bit further than said',
     },
 ]
 
