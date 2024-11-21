@@ -3,8 +3,9 @@
 // all TypeScript weakness flags.
 // : number
 import { showReviewTotal, populateUser, showDetails, getTopTwoReviews } from "./utils";
+import { Permissions, LoyaltyUser } from "./enums";
 import { Price ,Country } from "./type";
-import { Review } from "./interfaces";
+import Review  from "./interfaces";
 const propertyContainer = document.querySelector('.properties')
 const reviewContainer = document.querySelector('.reviews')
 const container = document.querySelector('.container')
@@ -13,16 +14,7 @@ const footer = document.querySelector('.footer')
 
 let isLoggedIn : boolean
 
-enum Permissions {
-    ADMIN = 'ADMIN', 
-    READ_ONLY = 'READ_ONLY'
-}
-enum LoyaltyUser {
-    GOLD_USER = 'GOLD_USER',
-    SILVER_USER = 'SILVER_USER',
-    BRONZE_USER = 'BRONZE_USER'
-}
-
+// Reviews
 const reviews : Review[] = [
     {
         name: 'Sheia',
@@ -54,22 +46,22 @@ const you = {
     age : 35,
     stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
 } 
-
-
-// Array Of Properties
-const properties : {
+interface Properties{
     image: string;
-    title:string;
+    title: string;
     price: Price;
     location: {
         firstLine: string;
         city: string;
-        code: number;
+        code: number| string;
         country: Country;
-    };
-    contact: [number, string];
-    isAvailable: boolean
-}[] = [
+    }
+    contact: [number, string]
+    isAvailable: boolean;
+}
+
+// Array Of Properties
+const properties : Properties[] = [
     {
         image: '',
         title: 'Colombian Shack',
@@ -127,7 +119,7 @@ for (let i = 0; i < properties.length; i++) {
     propertyContainer.appendChild(card)
 }
 
-//Broken code
+
 let count = 0
 function addReviews(array: Review[]) : void {
     if (!count ) {
@@ -148,3 +140,28 @@ button.addEventListener('click', () => addReviews(reviews))
 let currentLocation : [string, string, number] = ['London', '11.03', 17]
 footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2] + '°'
 
+// Classes
+class MainProperty {
+    src: string;
+    title: string;
+    reviews: Review[]
+    constructor(src: string, title: string, reviews: Review[])
+        this.src = scr
+        this.title = title
+        this.reviews = reviews
+}
+
+let yourMainProperty = new MainProperty(
+    images/italian-property.jpg', 
+    'Italian House',
+[{
+    name: 'Olive',
+    stars: 5;
+    LoyaltyUser: LoyaltyUser.GOLD_USER,
+    date: '12-04-2021',
+}])
+
+const mainImageContainer = document.querySelector('.main-image')
+const image = document.querySelector('img')
+image.setAttribute('src', yourMainProperty.src)
+mainImageContainer.appendChild(image)
