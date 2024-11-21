@@ -2,14 +2,26 @@
 // Write a function that will only accept numbers and attend to 
 // all TypeScript weakness flags.
 // : number
-import { showReviewTotal, populateUser } from "./utils";
-import { Permissions, LoyaltyUser } from "./enums";
+import { showReviewTotal, populateUser, showDetails, getTopTwoReviews } from "./utils";
 import { Price ,Country } from "./type";
-const propertiesContainer = document.querySelector('.properties')
+const propertyContainer = document.querySelector('.properties')
+const reviewContainer = document.querySelector('.reviews')
+const container = document.querySelector('.container')
+const button = document.querySelector('button')
 const footer = document.querySelector('.footer')
 
 let isLoggedIn : boolean
 
+
+enum Permissions {
+    ADMIN = 'ADMIN', 
+    READ_ONLY = 'READ_ONLY'
+}
+enum LoyaltyUser {
+    GOLD_USER = 'GOLD_USER',
+    SILVER_USER = 'SILVER_USER',
+    BRONZE_USER = 'BRONZE_USER'
+}
 
 const reviews : any[] = [
     {
@@ -37,7 +49,7 @@ const reviews : any[] = [
 const you = {
     firstName: 'Bobby',
     lastName: 'Brown',
-    Permissions: Permissions.ADMIN,
+    permissions: Permissions.ADMIN,
     isReturning: true,
     age : 35,
     stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
@@ -114,6 +126,29 @@ for (let i = 0; i < properties.length; i++) {
     showDetails(you.permissions, card, properties[i].price)
     propertyContainer.appendChild(card)
 }
+
+//Broken code
+let count = 0
+function addReviews(array: {
+    name: string;
+    stars: number;
+    loyaltyUser: LoyaltyUser;
+    date: string;
+}[]) : void {
+    if (!count ) {
+        count++
+        const topTwo = getTopTwoReviews(array)
+        for (let i = 0; i < topTwo.length; i++) {
+            const card = document.createElement('div')
+            card.classList.add('review-card')
+            card.innerHTML = topTwo[i].stars + ' stars from ' + topTwo[i].name
+            reviewContainer.appendChild(card)
+        }
+        container.removeChild(button) 
+    }
+}
+
+button.addEventListener('click', () => addReviews(reviews))
 
 let currentLocation : [string, string, number] = ['London', '11.03', 17]
 footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2] + '°'

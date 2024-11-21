@@ -1,12 +1,21 @@
 const returningUserDisplay = document.querySelector('#returning-user')
 const userNameDisplay = document.querySelector('#user')
 const reviewTotalDisplay = document.querySelector('#reviews')
-import { LoyaltyUser, Permissions } from "./enums"
 
-export function showReviewTotal (value: number, reviewer: string, isLoyalty: LoyaltyUser) {
+enum Permissions {
+    ADMIN = 'ADMIN', 
+    READ_ONLY = 'READ_ONLY'
+}
+
+enum LoyaltyUser {
+    GOLD_USER = 'GOLD_USER',
+    SILVER_USER = 'SILVER_USER',
+    BRONZE_USER = 'BRONZE_USER'
+}
+
+export function showReviewTotal(value: number, reviewer: string, isLoyalty: LoyaltyUser) {
     const iconDisplay = LoyaltyUser.GOLD_USER ? '⭐' : ''
-    reviewTotalDisplay.innerHTML = value.toString() + makeMultiple(value) + '| last review by ' +
-    reviewer + ' ' + iconDisplay
+    reviewTotalDisplay.innerHTML = value.toString() + ' review' + makeMultiple(value) + ' | last reviewed by ' + reviewer + ' ' + iconDisplay    
 }
 
 export function populateUser(isReturning : boolean, userName: string ) {
@@ -24,12 +33,25 @@ export function showDetails(value: boolean | Permissions, element : HTMLDivEleme
     }
 }
 
-function add( firstValue: number, secondValue: number ) : number {
-    return firstValue + secondValue
+export function makeMultiple(value: number) : string {
+    if (value > 1) {
+        return 's'
+    } else return ''
 }
 
-export function makeMultiple(value: number) : string {
-    if (value > 1 || value == 0) {
-        return 's'
-    }  else return ''
-}
+// Broken code
+export function getTopTwoReviews(reviews: {
+    name: string;
+    stars: number;
+    loyaltyuser: LoyaltyUser;
+    date: string;
+}[]) : {
+    name: string;
+    stars: number;
+    loyaltyuser: LoyaltyUser;
+    date: string;
+}[] {
+    const sortedReviews = reviews.sort((a, b) => b.stars - a.stars)
+    return sortedReviews.slice(0,2)
+   }
+   
