@@ -1,6 +1,7 @@
 const returningUserDisplay = document.querySelector('#returning-user')
 const userNameDisplay = document.querySelector('#user')
 const reviewTotalDisplay = document.querySelector('#reviews')
+import { Review } from "./interfaces"
 
 enum Permissions {
     ADMIN = 'ADMIN', 
@@ -40,17 +41,7 @@ export function makeMultiple(value: number) : string {
 }
 
 // Broken code
-export function getTopTwoReviews(reviews: {
-    name: string;
-    stars: number;
-    loyaltyuser: LoyaltyUser;
-    date: string;
-}[]) : {
-    name: string;
-    stars: number;
-    loyaltyuser: LoyaltyUser;
-    date: string;
-}[] {
+export function getTopTwoReviews(reviews: Review[]) : Review[] {
     const sortedReviews = reviews.sort((a, b) => b.stars - a.stars)
     return sortedReviews.slice(0,2)
    }
