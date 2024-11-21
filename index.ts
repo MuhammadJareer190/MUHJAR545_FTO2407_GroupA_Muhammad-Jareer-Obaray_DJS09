@@ -4,6 +4,7 @@
 // : number
 import { showReviewTotal, populateUser } from "./utils";
 import { Permissions, LoyaltyUser } from "./enums";
+import { Price ,Country } from "./type";
 const propertiesContainer = document.querySelector('.properties')
 const footer = document.querySelector('.footer')
 
@@ -27,7 +28,7 @@ const reviews : any[] = [
         name: 'Omar',
         stars: 4,
         loyaltyUser: LoyaltyUser.SILVER_USER,
-        date: '27-03-2021'
+        date: '27-03-2021',
         description: 'Great host, location was a bit further than said',
     },
 ]
@@ -42,16 +43,17 @@ const you = {
     stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
 } 
 
-// Properties
+
+// Array Of Properties
 const properties : {
     image: string;
     title:string;
-    price: number;
+    price: Price;
     location: {
         firstLine: string;
         city: string;
         code: number;
-        country: string;
+        country: Country;
     };
     contact: [number, string];
     isAvailable: boolean
@@ -72,7 +74,7 @@ const properties : {
     {
         image: '',
         title: 'Polish Cottage',
-        price: 34,
+        price: 30,
         location: {
             firstLine: 'no 23',
             city: 'Gdansk',
@@ -85,7 +87,7 @@ const properties : {
     {
         image: '',
         title: 'Londan Flat',
-        price: 23,
+        price: 25,
         location: {
             firstLine: 'flat 15',
             city: 'Londan',
@@ -101,18 +103,6 @@ const properties : {
 showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser)
 populateUser(you.isReturning, you.firstName)
 
-isLoggedIn = true
-
-let authorityStatus : any
-
-function showDetails(authorityStatus: boolean | Permissions, element : HTMLDivElement, price: number) {
-   if (authorityStatus) {
-       const priceDisplay = document.createElement('div')
-       priceDisplay.innerHTML = price.toString() + '/night'
-       element.appendChild(priceDisplay)
-   }
-}
-
 // Add the properties
 for (let i = 0; i < properties.length; i++) {
     const card = document.createElement('div')
@@ -121,11 +111,10 @@ for (let i = 0; i < properties.length; i++) {
     const image = document.createElement('img')
     image.setAttribute('src', properties[i].image)
     card.appendChild(image)
+    showDetails(you.permissions, card, properties[i].price)
     propertyContainer.appendChild(card)
-    showDetails(you.Permissions,authorityStatus, card, properties[i].price)
 }
 
-// use your location, your current time, and the current temperature of your
-// location
-let currentLocation: [string, string, number] = ['Cape Town', '11;30', 25]
+let currentLocation : [string, string, number] = ['London', '11.03', 17]
 footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2] + '°'
+
