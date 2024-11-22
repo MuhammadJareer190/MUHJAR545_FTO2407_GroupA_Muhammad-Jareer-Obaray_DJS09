@@ -90,7 +90,7 @@ const properties : Properties[] = [
         isAvailable: true
     },
     {
-        image: string,
+        image: '',
         title: 'Malia Hotel',
         price: 35,
         location: {
@@ -98,7 +98,7 @@ const properties : Properties[] = [
             city: 'Malai',
             code: 43224,
             country: 'Malaysia',
-        }
+        },
         contact: [ +60349822083, 'lee34@gmail.com'],
         isAvailable:false,
     }

@@ -6,6 +6,7 @@ export  interface Review {
     stars: number;
     loyaltyUser: LoyaltyUser;
     date: string;
+    description?: string; // ? Makes it optional
 }
 
 export interface Properties{

@@ -6,7 +6,7 @@
     "webpack": "^5.96.1"
   },
   "scripts": {
-    "build": "typescript",
+    "build": "tsc",
     "watch": "webpack -w"
   }
 }
