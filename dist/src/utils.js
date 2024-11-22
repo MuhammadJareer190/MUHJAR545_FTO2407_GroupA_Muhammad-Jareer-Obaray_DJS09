@@ -1,13 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.showReviewTotal = showReviewTotal;
-exports.populateUser = populateUser;
-exports.showDetails = showDetails;
-exports.makeMultiple = makeMultiple;
-exports.getTopTwoReviews = getTopTwoReviews;
-var returningUserDisplay = document.querySelector('#returning-user');
-var userNameDisplay = document.querySelector('#user');
-var reviewTotalDisplay = document.querySelector('#reviews');
+const returningUserDisplay = document.querySelector('#returning-user');
+const userNameDisplay = document.querySelector('#user');
+const reviewTotalDisplay = document.querySelector('#reviews');
 var Permissions;
 (function (Permissions) {
     Permissions["ADMIN"] = "ADMIN";
@@ -19,32 +12,32 @@ var LoyaltyUser;
     LoyaltyUser["SILVER_USER"] = "SILVER_USER";
     LoyaltyUser["BRONZE_USER"] = "BRONZE_USER";
 })(LoyaltyUser || (LoyaltyUser = {}));
-function showReviewTotal(value, reviewer, isLoyalty) {
-    var iconDisplay = LoyaltyUser.GOLD_USER ? '⭐' : '';
+export function showReviewTotal(value, reviewer, isLoyalty) {
+    const iconDisplay = LoyaltyUser.GOLD_USER ? '⭐' : '';
     reviewTotalDisplay.innerHTML = value.toString() + ' review' + makeMultiple(value) + ' | last reviewed by ' + reviewer + ' ' + iconDisplay;
 }
-function populateUser(isReturning, userName) {
+export function populateUser(isReturning, userName) {
     if (isReturning == true) {
         returningUserDisplay.innerHTML = 'back';
     }
     userNameDisplay.innerHTML = userName;
 }
-function showDetails(value, element, price) {
+export function showDetails(value, element, price) {
     if (value) {
-        var priceDisplay = document.createElement('div');
+        const priceDisplay = document.createElement('div');
         priceDisplay.innerHTML = price.toString() + '/night';
         element.appendChild(priceDisplay);
     }
 }
-function makeMultiple(value) {
+export function makeMultiple(value) {
     if (value > 1) {
         return 's';
     }
     else
         return '';
 }
-// Broken code
-function getTopTwoReviews(reviews) {
-    var sortedReviews = reviews.sort(function (a, b) { return b.stars - a.stars; });
+export function getTopTwoReviews(reviews) {
+    const sortedReviews = reviews.sort((a, b) => b.stars - a.stars);
     return sortedReviews.slice(0, 2);
 }
+//# sourceMappingURL=utils.js.map
